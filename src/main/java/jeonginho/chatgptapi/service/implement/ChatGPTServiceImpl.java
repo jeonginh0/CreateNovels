@@ -11,6 +11,13 @@ import org.springframework.web.client.RestTemplate;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * ChatGPTServiceImpl
+ * ChatGPTService 인터페이스의 구현체
+ *
+ * 세부 사항 메서드를 정리한 구현체
+ * */
+
 @Service
 public class ChatGPTServiceImpl implements ChatGPTService {
 

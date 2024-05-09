@@ -1,6 +1,5 @@
-package jeonginho.chatgptapi.Controller;
+package jeonginho.chatgptapi.controller;
 
-import jeonginho.chatgptapi.dto.ChatGPTResponse;
 import jeonginho.chatgptapi.service.ChatGPTService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
