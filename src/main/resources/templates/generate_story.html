@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate Story</title>
+</head>
+<body>
+<h1>Generate Story</h1>
+<form id="storyForm" action="/generate_story" method="post">
+    <label for="main">Main Character:</label>
+    <input type="text" id="main" name="main" required><br>
+
+    <label for="sub1">Character 1:</label>
+    <input type="text" id="sub1" name="sub1" required><br>
+
+    <label for="sub2">Character 2:</label>
+    <input type="text" id="sub2" name="sub2" required><br>
+
+    <label for="background">Background:</label>
+    <input type="text" id="background" name="background" required><br>
+
+    <label for="setting">Setting:</label>
+    <input type="text" id="setting" name="setting" required><br>
+
+    <button type="submit">Generate Story</button>
+</form>
+
+<div id="storyContainer">
+    <!-- 생성된 이야기가 여기에 나타날 것입니다. -->
+</div>
+</body>
+</html>
