@@ -6,24 +6,24 @@
     <title>Generate Story</title>
 </head>
 <body>
-<h1>Generate Story</h1>
-<form id="storyForm" th:action="@{/generate_story}" method="post">
-    <label for="main">Main Character:</label>
+<h1>GPT를 사용한 소설 생성 웹 애플리케이션</h1>
+<form id="storyForm" th:action="@{/generateStory}" method="post">
+    <label for="main">주인공:</label>
     <input type="text" id="main" name="main" required><br>
 
-    <label for="sub1">Character 1:</label>
+    <label for="sub1">등장인물 1:</label>
     <input type="text" id="sub1" name="sub1" required><br>
 
-    <label for="sub2">Character 2:</label>
+    <label for="sub2">등장인물 2:</label>
     <input type="text" id="sub2" name="sub2" required><br>
 
-    <label for="background">Background:</label>
+    <label for="background">배경(예-중세시대, 현대, 카페, 가정집 등):</label>
     <input type="text" id="background" name="background" required><br>
 
-    <label for="setting">Setting:</label>
+    <label for="setting">장르(예-공포, 로맨스, 엽기 등):</label>
     <input type="text" id="setting" name="setting" required><br>
 
-    <button type="submit">Generate Story</button>
+    <button type="submit">생성하기</button>
 </form>
 
 <div id="storyContainer">

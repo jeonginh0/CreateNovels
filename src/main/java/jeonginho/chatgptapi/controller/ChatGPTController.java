@@ -2,7 +2,9 @@ package jeonginho.chatgptapi.controller;
 
 import jeonginho.chatgptapi.service.ChatGPTService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +19,7 @@ import java.util.Map;
  * selectChoice 메서드 : 이전 프롬프트(소설, 선택지) 기반으로 이어지는 다음 이야기와 선택지를 반환
  * */
 
-@RestController// Spring REST 컨트롤러 선언
+@Controller// Spring 컨트롤러 선언
 @RequestMapping("/")
 public class ChatGPTController {
     @Autowired
@@ -32,14 +34,15 @@ public class ChatGPTController {
         return chatGPTService.generateText(prompt);
     }
 
-    @GetMapping("/generate_story")
+    @GetMapping("/generateStory")
     public String getGenerateStory() {
-        return "generate_story";
+        return "generateStory";
     }
 
     // GPT
-    @PostMapping("/generate_story")
-    public String postGenerateStory(@RequestBody Map<String, String> requestBody, Model model) {
+    @PostMapping(value = "/generateStory")
+    public String postGenerateStory(@RequestParam Map<String, String> requestBody, Model model) {
+        // @RequestParam 어노테이션을 사용하여 각각의 파라미터를 받아서 처리.
 
         // 클라이언트에서 전달한 데이터 추출
         String main = requestBody.get("main"); // 주인공
@@ -69,9 +72,8 @@ public class ChatGPTController {
         // Postman으로 체킹
         // initialStory 즉시 반환.
 //        return initialStory;
-        return "generate_story";
+        return "generateStory";
     }
-
 
     // 클라이언트가 선택을 클릭할 때 호출되는 엔드포인트 추가
     @PostMapping("/select_choice")
