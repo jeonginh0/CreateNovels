@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +7,7 @@
 </head>
 <body>
 <h1>Generate Story</h1>
-<form id="storyForm" action="/generate_story" method="post">
+<form id="storyForm" th:action="@{/generate_story}" method="post">
     <label for="main">Main Character:</label>
     <input type="text" id="main" name="main" required><br>
 
@@ -27,7 +27,10 @@
 </form>
 
 <div id="storyContainer">
-    <!-- 생성된 이야기가 여기에 나타날 것입니다. -->
+    <p th:text="${story}"></p>
+    <ul>
+        <li th:each="choice : ${choices}" th:text="${choice}"></li>
+    </ul>
 </div>
 </body>
 </html>
