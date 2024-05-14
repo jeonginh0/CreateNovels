@@ -70,7 +70,8 @@ public class ChatGPTServiceImpl implements ChatGPTService {
     public String firstPrompt(String background, String main, String sub1, String sub2, String setting) {
         return String.format("배경은 %s이고 등장인물은 주인공(%s)과 %s,%s이 나오는 %s장르의 소설을 만들어줘 대화도 있으면 좋겠어."
                 + " 추가적으로 긴 내용의 소설을 부탁할게. "
-                + "또한 끝에 사용자에게 스토리의 방향성을 제시하는 선택지(3개)도 넣어줘\n\n###\n\n", background, main, sub1, sub2, setting);
+                + "또한 끝에 사용자에게 스토리의 방향성을 제시하는 선택지(3개)도 넣어줘. 첫 번째 선택지 문장의 첫 글자 앞에 $, 마지막 글자 뒤에 $를 넣고,"
+                + " 두 번째 선택지 문장의 첫 글자 앞에 @ 마지막 글자 뒤에 @를 넣어줘. 그리고 세 번째 선택지 문장의 첫 글자 앞에 <, 마지막 글자 뒤에 >를 넣어줘. \n\n###\n\n", background, main, sub1, sub2, setting);
     }
 
     @Override //다음 스토리(프롬프트)를 생성하는 메서드
@@ -83,6 +84,6 @@ public class ChatGPTServiceImpl implements ChatGPTService {
     @Override //엔딩 스토리(프롬프트)를 생성하는 메서드
     public String finalPrompt(String prevStory) {
         return String.format("이전 스토리는 %s이고 이때까지의 스토리를 종합시킨다음 완결을 내줘. 그리고 이때까지 만든 소설을 다 합쳐서 보여줘." +
-                "추가로 선택지는 더이상 필요없어.", prevStory);
+                "그리고 선택지는 더이상 필요없어.", prevStory);
     }
 }

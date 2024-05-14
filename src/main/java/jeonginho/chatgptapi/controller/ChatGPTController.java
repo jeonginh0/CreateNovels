@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * ChatGPTController
@@ -25,6 +27,7 @@ public class ChatGPTController {
     @Autowired
     private ChatGPTService chatGPTService;
 
+    private String testText;
     private String prevStory; // 이전 이야기를 유지하는 변수
     private int requestCount = 0; // 요청 횟수를 저장하는 변수
 
@@ -34,7 +37,7 @@ public class ChatGPTController {
         return chatGPTService.generateText(prompt);
     }
 
-    @GetMapping("/generateStory")
+    @GetMapping("/")
     public String getGenerateStory() {
         return "generateStory";
     }
@@ -55,6 +58,15 @@ public class ChatGPTController {
         String initialPrompt = chatGPTService.firstPrompt(background, main
                 , sub1, sub2, setting);
         String initialStory = chatGPTService.generateText(initialPrompt);
+
+        System.out.println("initialStory: " + initialStory);
+        Pattern pattern = Pattern.compile("\\$(.*?)\\$");
+        Matcher matcher = pattern.matcher(initialStory);
+        while (matcher.find()) {
+            testText = matcher.group(1);
+        }
+        System.out.println("testText = " + testText);
+
         // 단계 2: 사용자에게 초기 이야기와 선택지 제공
         List<String> choices = chatGPTService.generateChoices(initialStory);
 
