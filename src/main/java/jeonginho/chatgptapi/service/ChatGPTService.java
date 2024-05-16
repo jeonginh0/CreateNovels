@@ -8,4 +8,5 @@ public interface ChatGPTService {
     String firstPrompt(String background, String main, String sub1, String sub2, String setting);
     String nextPrompt(String prevStory, String choice);
     String finalPrompt(String prevStory);
+    String prompt(String background, String main, String sub1, String sub2, String setting);
 }
