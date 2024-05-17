@@ -37,12 +37,13 @@ public class ChatGPTController {
         return chatGPTService.generateText(prompt);
     }
 
+    // 조회
     @GetMapping("/")
     public String getGenerateStory() {
         return "generateStory";
     }
 
-    // GPT
+    // Post
     @PostMapping(value = "/generateStory")
     public String postGenerateStory(@RequestParam Map<String, String> requestBody, Model model) {
         // @RequestParam 어노테이션을 사용하여 각각의 파라미터를 받아서 처리.
@@ -55,7 +56,7 @@ public class ChatGPTController {
         String setting = requestBody.get("setting"); // 소설 장르 ex) 로맨스, 판타지, 호러 등
 
         // 단계 1: 사용자 입력을 기반으로 초기 이야기 생성
-        String initialPrompt = chatGPTService.firstPrompt(background, main
+        String initialPrompt = chatGPTService.prompt(background, main
                 , sub1, sub2, setting);
         String initialStory = chatGPTService.generateText(initialPrompt);
 
