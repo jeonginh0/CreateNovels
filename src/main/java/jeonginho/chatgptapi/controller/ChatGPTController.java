@@ -75,7 +75,7 @@ public class ChatGPTController {
         prevStory = initialStory;
 
         //요청 횟수 카운트
-        requestCount ++;
+//        requestCount ++;
 
         // 이야기와 선택지를 모델에 추가
         model.addAttribute("story", initialStory);
@@ -88,29 +88,42 @@ public class ChatGPTController {
         return "generateStory";
     }
 
-    // 클라이언트가 선택을 클릭할 때 호출되는 엔드포인트 추가
-    @PostMapping("/select_choice")
-    public ResponseEntity<?> selectChoice(@RequestBody Map<String, String> requestBody) {
+    @PostMapping("/generateStorys")
+    public ResponseEntity<?> select(@RequestParam Map<String, String> requestBody, Model model) {
         String choice = requestBody.get("choice");
 
-        // 요청 횟수 카운트
-        requestCount ++;
+        String continuePrompt = chatGPTService.continuePrompt(prevStory, choice);
+        String nextStory = chatGPTService.generateText(continuePrompt);
 
-        if (requestCount >= 10) {
-            //요청 회수가 10번인 경우 소설 종결 요청
-            String finalStory = chatGPTService.finalPrompt(prevStory);
-            return ResponseEntity.ok().body(finalStory);
-        }
-
-        // 이전 스토리와 선택지를 기반으로 다음 스토리 생성
-        String nextPrompt = chatGPTService.nextPrompt(prevStory, choice);
-        String nextStory = chatGPTService.generateText(nextPrompt);
-
-        // 현재 스토리 업데이트
         prevStory = nextStory;
 
         ResponseEntity<String> currentStory = ResponseEntity.ok().body(nextStory);
-        // 다음 스토리를 함께 반환
         return currentStory;
     }
+
+    // 클라이언트가 선택을 클릭할 때 호출되는 엔드포인트 추가
+//    @PostMapping("/select_choice")
+//    public ResponseEntity<?> selectChoice(@RequestBody Map<String, String> requestBody) {
+//        String choice = requestBody.get("choice");
+//
+//        // 요청 횟수 카운트
+//        requestCount ++;
+//
+//        if (requestCount >= 10) {
+//            //요청 회수가 10번인 경우 소설 종결 요청
+//            String finalStory = chatGPTService.finalPrompt(prevStory);
+//            return ResponseEntity.ok().body(finalStory);
+//        }
+//
+//        // 이전 스토리와 선택지를 기반으로 다음 스토리 생성
+//        String nextPrompt = chatGPTService.nextPrompt(prevStory, choice);
+//        String nextStory = chatGPTService.generateText(nextPrompt);
+//
+//        // 현재 스토리 업데이트
+//        prevStory = nextStory;
+//
+//        ResponseEntity<String> currentStory = ResponseEntity.ok().body(nextStory);
+//        // 다음 스토리를 함께 반환
+//        return currentStory;
+//    }
 }
