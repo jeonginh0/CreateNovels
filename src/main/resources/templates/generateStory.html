@@ -28,9 +28,15 @@
 
 <div id="storyContainer">
     <p th:text="${story}"></p>
-    <ul>
-        <li th:each="choice : ${choices}" th:text="${choice}"></li>
-    </ul>
+    <form id="choiceForm" th:action="@{/select_choice}" method="post">
+        <ul>
+            <li th:each="choice : ${choices}">
+                <label th:text="${choice}"></label>
+                <input type="radio" th:name="choice" th:value="${choice}">
+            </li>
+        </ul>
+        <button type="submit">선택하기</button>
+    </form>
 </div>
 </body>
 </html>
